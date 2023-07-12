@@ -14,31 +14,21 @@ server((req, res) => {
     Emitter.emit('log', `${req.url}\t${req.method}`, 'requests');
 
     let file_ext = path.extname(req.url), content_type, file_path;
-    // CHECK FILE EXTENSION
-    if (file_ext === '.css') {
-        content_type = 'text/css';
-    } else if (file_ext === '.js') {
-        content_type = 'text/javascript';
-    } else if (file_ext === '.json') {
-        content_type = 'application/json';
-    } else if (file_ext === '.png') {
-        content_type = 'image/png';
-    } else if (file_ext === '.jpg') {
-        content_type = 'image/jpg';
-    } else if (file_ext === '.jpeg') {
-        content_type = 'image/jpeg';
-    } else if (file_ext === '.txt') {
-        content_type = 'text/plain';
-    } else {
-        content_type = 'text/html';
-    }
+    const contentTypeMap = {
+        '.css': 'text/css',
+        '.js': 'text/javascript',
+        '.json': 'application/json',
+        '.png': 'image/png',
+        '.jpg': 'image/jpeg',
+        '.jpeg': 'image/jpeg',
+        '.txt': 'text/plain',
+    };
+
+    content_type = contentTypeMap[file_ext] || 'text/html';
+
     // CHECK REQUESTED PATH
-    if (content_type === 'text/html' && req.url === '/') {
-        file_path = path.join(__dirname, 'views', 'index.html');
-    } else if (content_type === 'text/html' && req.url.slice(-1) === '/') {
-        file_path = path.join(__dirname, 'views', req.url, 'index.html');
-    } else if (content_type === 'text/html') {
-        file_path = path.join(__dirname, 'views', req.url, 'index.html');
+    if (content_type === 'text/html') {
+        file_path = req.url === '/' ? path.join(__dirname, 'views', 'index.html') : path.join(__dirname, 'views', req.url, 'index.html');
     } else {
         file_path = path.join(__dirname, req.url);
     }
@@ -61,8 +51,8 @@ server((req, res) => {
                 res.writeHead(200, { 'Content-Type': content_type });
                 res.end(data);
                 return;
-            }); 
-        } 
+            });
+        }
     } else {
         // RENDER 404.HTML PAGE IF PATH DOES NOT EXIST
         fs.readFile(path.join(__dirname, 'views', '404.html'), 'utf-8', (err, data) => {

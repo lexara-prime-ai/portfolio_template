@@ -8,8 +8,7 @@ const logger = async (message, file_name) => {
     let time = format(new Date(), 'yyyMMdd\tHH:mm:ss');
     let log_item = `${time}\t${uuid()}\t${message}\n`
     let dir_path = path.join(__dirname, 'logs');
-    let file_path = path.join(__dirname, 'logs', file_name);
-    file_path += '.log';
+    let file_path = path.join(__dirname, 'logs', `${file_name}.log`);
     log(log_item);
     try {
         if (!fs.existsSync(dir_path)) {

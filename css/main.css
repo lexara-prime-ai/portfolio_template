@@ -14,7 +14,26 @@
     letter-spacing: 1px;
     margin: 0;
     padding: 0;
-    transition: .4s all ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #141418;
 }
 
 body {
@@ -28,33 +47,39 @@ body {
     background: var(--bg-primary);
     border: 3px solid var(--light-alt);
     padding: 3px;
+    transition: .3s all ease;
 }
 
 .logo:hover {
     animation: shake 200ms infinite;
     animation: hover 300ms infinite;
 }
+
 /* ANIMATIONS */
 @keyframes shake {
-    0%{
+    0% {
         transform: translateX(2px);
     }
-    50%{
+
+    50% {
         transform: translateX(-2px);
     }
-    100%{
+
+    100% {
         transform: translateX(0px);
     }
 }
 
 @keyframes hover {
-    0%{
+    0% {
         transform: translateY(1px);
     }
-    50%{
+
+    50% {
         transform: translateX(-1px);
     }
-    100%{
+
+    100% {
         transform: translateX(0px);
     }
 }
@@ -81,6 +106,7 @@ body {
     color: var(--light);
     font-size: 1.5rem;
     cursor: pointer;
+    transition: .3s all ease;
 }
 
 .navbar-nav .link-item:hover {
@@ -107,6 +133,7 @@ body {
     border: .15rem solid var(--light-alt);
     color: var(--light-alt);
     cursor: pointer;
+    transition: .3s all ease;
 }
 
 .cta:hover {
@@ -250,7 +277,7 @@ hr {
     margin-top: 3rem;
     margin-bottom: 3rem;
     border-top: none;
-    color: var(--bg-primary);
+    border-bottom: 1px solid var(--bg-primary);
     animation: widen 4s infinite;
 }
 
@@ -259,9 +286,11 @@ hr {
     0% {
         transform: scale(0);
     }
+
     50% {
         transform: scale(1);
     }
+
     100% {
         transform: scale(0);
     }
@@ -292,6 +321,7 @@ hr {
 .box-img-selected {
     background: var(--light);
     box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, .2);
+    transition: .3s all ease;
 }
 
 .box-img:hover {
@@ -315,7 +345,8 @@ hr {
     padding-bottom: 3px;
 }
 
-.project-list, .others-list {
+.project-list,
+.others-list {
     list-style: none;
     font-size: 14px;
 }
@@ -337,11 +368,13 @@ hr {
     font-size: 1rem;
 }
 
-.expand-projects , .expand-blog {
+.expand-projects,
+.expand-blog {
     color: #ddc54c;
     font-size: 1.3rem;
     border-radius: 99%;
-    padding:.5rem;
+    padding: .5rem;
+    transition: .3s all ease;
 }
 
 .expand-projects:hover {
